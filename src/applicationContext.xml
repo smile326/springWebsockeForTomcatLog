@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/context   
+        				http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        				http://www.springframework.org/schema/websocket 
+       					http://www.springframework.org/schema/websocket/spring-websocket.xsd
+       					http://www.springframework.org/schema/mvc   
+        				http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       					 ">
+
+	<!-- websocket配置1 -->
+	<bean id="websocket" class="com.he.websocket.WebsocketHandler" />
+	<websocket:handlers>
+		<websocket:mapping path="/ws.do" handler="websocket" />
+		<websocket:handshake-interceptors>
+			<bean class="com.he.websocket.MyHandShake" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+	
+	<context:component-scan base-package="com.he.websocket.WebsocketConfig" />
+	<context:component-scan base-package="com.he.websocket.WebsocketHandler" />
+</beans>
